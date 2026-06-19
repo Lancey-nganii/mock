@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CFAS Quiz 2026 — PAS 2, 7, 8, 10, 12, 16, 19, 20</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;color:#1a1a2e;min-height:100vh}
+:root{color-scheme:light}
+body[data-theme="dark"]{background:#0f172a;color:#e2e8f0}
+body[data-theme="dark"] .top{background:linear-gradient(135deg,#0f172a,#111827);color:#fff}
+body[data-theme="dark"] .top .tag{background:rgba(255,255,255,.12);color:#e2e8f0}
+body[data-theme="dark"] .score-bar,
+body[data-theme="dark"] .nav,
+body[data-theme="dark"] .section,
+body[data-theme="dark"] .sec-hdr,
+body[data-theme="dark"] .qcard,
+body[data-theme="dark"] .ans-box,
+body[data-theme="dark"] .comp-area textarea,
+body[data-theme="dark"] .comp-solution,
+body[data-theme="dark"] .summary,
+body[data-theme="dark"] .sum-card{background:#111827;border-color:#334155;color:#e2e8f0}
+body[data-theme="dark"] .score-bar{border-bottom-color:#334155}
+body[data-theme="dark"] .nav{border-bottom:1px solid #334155}
+body[data-theme="dark"] .ntab{background:#1f2937;color:#cbd5e1;border-color:#334155}
+body[data-theme="dark"] .ntab.on{background:#3b82f6;color:#fff;border-color:#3b82f6}
+body[data-theme="dark"] .opt{border-color:#334155;color:#e2e8f0}
+body[data-theme="dark"] .opt:hover{border-color:#818cf8;background:#111827}
+body[data-theme="dark"] .opt.correct{border-color:#22c55e;background:#072f16;color:#d1fae5}
+body[data-theme="dark"] .opt.wrong{border-color:#f87171;background:#4b1414;color:#fee2e2}
+body[data-theme="dark"] .qtext,
+body[data-theme="dark"] .score-bar span,
+body[data-theme="dark"] .sec-hdr p,
+body[data-theme="dark"] .sum-lbl,
+body[data-theme="dark"] .tag{color:#cbd5e1}
+body[data-theme="dark"] .qnum{color:#93c5fd}
+body[data-theme="dark"] .qbadge{background:#1e40af;color:#dbeafe}
+body[data-theme="dark"] .show-ans-btn,
+body[data-theme="dark"] .btn-primary{background:#4f46e5;color:#fff}
+body[data-theme="dark"] .btn-secondary{background:#1f2937;color:#cbd5e1;border:1px solid #334155}
+body[data-theme="dark"] .check-btn{background:#1e3a8a;color:#fff}
+body[data-theme="dark"] .tf-btn{background:#111827;color:#e2e8f0;border-color:#334155}
+body[data-theme="dark"] .tf-btn:hover{background:#1e293b}
+body[data-theme="dark"] .tf-btn.correct{border-color:#22c55e;background:#0f2f14;color:#d1fae5}
+body[data-theme="dark"] .tf-btn.wrong{border-color:#f87171;background:#4b1414;color:#fee2e2}
+body[data-theme="dark"] .comp-area textarea{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body[data-theme="dark"] .id-input{background:#111827;color:#e2e8f0;border-color:#334155}
+body[data-theme="dark"] .id-input.correct{background:#052e16}
+body[data-theme="dark"] .id-input.wrong{background:#4b1414}
+body[data-theme="dark"] .comp-solution{background:#17233b;border-color:#475569;color:#dbeafe}
+body[data-theme="dark"] .ans-box{background:#1e293b}
+body[data-theme="dark"] .tag{background:rgba(255,255,255,.12);color:#e2e8f0}
+.top{background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;padding:2rem 1.5rem;text-align:center}
+.top h1{font-size:1.5rem;font-weight:700;margin-bottom:.4rem}
+.top p{font-size:.82rem;opacity:.7;margin-bottom:.25rem}
+.top .tags{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-top:.75rem}
+.tag{font-size:.7rem;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.12);color:#fff}
+.score-bar{background:#fff;padding:.75rem 1.2rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid #e5e7eb;flex-wrap:wrap}
+.score-bar span{font-size:.82rem;color:#6b7280}
+.score-val{font-size:1.1rem;font-weight:700;color:#1a1a2e}
+.prog{flex:1;min-width:100px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#6366f1,#8b5cf6);transition:.3s;border-radius:4px}
+.btns{display:flex;gap:.5rem;flex-wrap:wrap}
+.btn{padding:.45rem 1rem;border:none;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer}
+.btn-primary{background:#6366f1;color:#fff}
+.btn-secondary{background:#f3f4f6;color:#374151;border:1px solid #d1d5db}
+.btn:hover{opacity:.88}
+.nav{display:flex;gap:.4rem;flex-wrap:wrap;padding:.75rem 1.2rem;background:#fff;border-bottom:1px solid #e5e7eb}
+.ntab{padding:.4rem .85rem;border:1px solid #d1d5db;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;background:#fff;color:#6b7280;transition:.15s;white-space:nowrap}
+.ntab.on{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+.section{display:none;padding:1rem 1.2rem 2rem}
+.section.on{display:block}
+.sec-hdr{background:#fff;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;border-left:4px solid #6366f1}
+.sec-hdr h2{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:.2rem}
+.sec-hdr p{font-size:.78rem;color:#6b7280}
+.qcard{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:1.1rem 1.25rem;margin-bottom:.85rem;transition:.15s}
+.qcard.answered{border-color:#a5b4fc}
+.qnum{font-size:.68rem;font-weight:700;color:#6366f1;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+.qbadge{background:#eff6ff;color:#1d4ed8;padding:2px 7px;border-radius:4px;font-size:.65rem}
+.qtext{font-size:.88rem;font-weight:500;line-height:1.6;color:#1a1a2e;margin-bottom:.8rem}
+.opts{display:flex;flex-direction:column;gap:.4rem}
+.opt{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem .7rem;border:1px solid #e5e7eb;border-radius:7px;cursor:pointer;font-size:.83rem;line-height:1.5;color:#374151;transition:.15s}
+.opt:hover{border-color:#a5b4fc;background:#faf5ff}
+.opt input{margin-top:.15rem;flex-shrink:0;accent-color:#6366f1}
+.opt.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d;font-weight:500}
+.opt.wrong{border-color:#dc2626;background:#fef2f2;color:#dc2626}
+.ans-box{margin-top:.7rem;padding:.65rem .85rem;background:#eff6ff;border-radius:7px;font-size:.82rem;line-height:1.65;color:#1e40af;display:none}
+.ans-box.show{display:block}
+.tf-opts{display:flex;gap:.6rem;margin-top:.4rem}
+.tf-btn{flex:1;padding:.55rem;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;background:#fff;color:#374151;transition:.15s;text-align:center}
+.tf-btn:hover{border-color:#a5b4fc;background:#f5f3ff}
+.tf-btn.sel-t{border-color:#16a34a;background:#f0fdf4;color:#15803d}
+.tf-btn.sel-f{border-color:#dc2626;background:#fef2f2;color:#dc2626}
+.tf-btn.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d}
+.tf-btn.wrong{border-color:#dc2626;background:#fef2f2;color:#dc2626}
+.comp-area{margin-top:.7rem}
+.comp-area textarea{width:100%;min-height:80px;padding:.6rem .8rem;border:1px solid #d1d5db;border-radius:7px;font-size:.82rem;font-family:inherit;resize:vertical;outline:none}
+.comp-area textarea:focus{border-color:#6366f1}
+.show-ans-btn{margin-top:.5rem;padding:.4rem .9rem;background:#6366f1;color:#fff;border:none;border-radius:6px;font-size:.76rem;font-weight:600;cursor:pointer}
+.show-ans-btn:hover{opacity:.88}
+.comp-solution{margin-top:.65rem;padding:.8rem;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;font-size:.81rem;line-height:1.75;color:#92400e;display:none;white-space:pre-line}
+.comp-solution.show{display:block}
+.id-input{margin-top:.5rem;width:100%;padding:.5rem .75rem;border:1px solid #d1d5db;border-radius:7px;font-size:.83rem;outline:none}
+.id-input:focus{border-color:#6366f1}
+.id-input.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d}
+.id-input.wrong{border-color:#dc2626;background:#fef2f2}
+.check-btn{margin-top:.45rem;padding:.38rem .8rem;background:#e5e7ff;color:#4338ca;border:none;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer}
+.check-btn:hover{background:#c7d2fe}
+.result-tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:.4rem}
+.correct-tag{background:#dcfce7;color:#15803d}
+.wrong-tag{background:#fef2f2;color:#dc2626}
+.summary{background:#fff;border-radius:12px;border:1px solid #e5e7eb;padding:1.25rem;margin-bottom:1rem}
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.6rem;margin-top:.8rem}
+.sum-card{border-radius:8px;padding:.6rem .8rem;text-align:center;border:1px solid #e5e7eb}
+.sum-num{font-size:1.4rem;font-weight:700}
+.sum-lbl{font-size:.7rem;color:#6b7280;margin-top:.1rem}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>CFAS Examination — 2026 Philippine Accounting Standards</h1>
+  <p>70-Item Comprehensive Quiz · Updated for 2026 PAS/PFRS</p>
+  <div class="tags">
+    <span class="tag">PAS 2 · Inventories</span>
+    <span class="tag">PAS 7 · Cash Flows</span>
+    <span class="tag">PAS 8 · Policies & Estimates</span>
+    <span class="tag">PAS 10 · Events After Reporting Period</span>
+    <span class="tag">PAS 12 · Income Taxes</span>
+    <span class="tag">PAS 16 · PPE</span>
+    <span class="tag">PAS 19 · Employee Benefits</span>
+    <span class="tag">PAS 20 · Government Grants</span>
+  </div>
+</div>
+
+<div class="score-bar">
+  <div>
+    <div style="font-size:.7rem;color:#9ca3af">SCORE</div>
+    <div class="score-val" id="scoreVal">0 / 70</div>
+  </div>
+  <div class="prog"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="btns">
+    <button type="button" class="btn btn-secondary" onclick="resetAll()">↺ Reset</button>
+    <button type="button" class="btn btn-secondary" id="themeToggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="ntab on" onclick="showSec('id',this)">Identification (20)</button>
+  <button class="ntab" onclick="showSec('tf',this)">True or False (25)</button>
+  <button class="ntab" onclick="showSec('mc',this)">Multiple Choice (20)</button>
+  <button class="ntab" onclick="showSec('cp',this)">Computation (5)</button>
+</div>
+
+<!-- ==================== IDENTIFICATION ==================== -->
+<div class="section on" id="sec-id">
+<div class="sec-hdr">
+  <h2>Part I — Identification (20 items)</h2>
+  <p>Write the term, concept, or name that best answers each statement. Type your answer and click Check.</p>
+</div>
+
+<script>
+const idQ=[
+ {n:1,pas:'PAS 2',q:'The cost formula that is strictly PROHIBITED under PAS 2 for measuring inventory costs.',a:'LIFO',alt:['last in first out','last-in first-out']},
+ {n:2,pas:'PAS 2',q:'The measurement basis for inventories under PAS 2: the lower of cost and this value, calculated as estimated selling price less estimated costs of completion and selling costs.',a:'Net Realizable Value',alt:['nrv','net realisable value']},
+ {n:3,pas:'PAS 2',q:'Under PAS 2, costs such as abnormal waste, storage costs of finished goods, and selling costs are classified as this — they should NOT be included in the cost of inventories.',a:'Period costs',alt:['period cost','expense']},
+ {n:4,pas:'PAS 7',q:'Short-term, highly liquid investments that are readily convertible to known amounts of cash and subject to insignificant risk of changes in value (generally ≤3 months from acquisition date).',a:'Cash equivalents',alt:['cash equivalent']},
+ {n:5,pas:'PAS 7',q:'The method of presenting operating cash flows that starts with net profit and adjusts for non-cash items and changes in working capital.',a:'Indirect method',alt:['indirect']},
+ {n:6,pas:'PAS 7',q:'Cash flows from acquisition and disposal of long-term assets and other investments not classified as cash equivalents are classified under this activity in the Statement of Cash Flows.',a:'Investing activities',alt:['investing activity','investing']},
+ {n:7,pas:'PAS 8',q:'This type of accounting change — such as a change in inventory cost formula from FIFO to Weighted Average — is applied RETROSPECTIVELY by restating prior period financial statements.',a:'Change in accounting policy',alt:['accounting policy change','policy change']},
+ {n:8,pas:'PAS 8',q:'A change in the estimated useful life of a depreciable asset is classified as this type of accounting change, applied PROSPECTIVELY to current and future periods only.',a:'Change in accounting estimate',alt:['accounting estimate change','estimate change']},
+ {n:9,pas:'PAS 8',q:'Material misapplications of PFRSs, mathematical mistakes, fraud, or oversights in prior year financial statements that are corrected by RETROSPECTIVE RESTATEMENT.',a:'Prior period errors',alt:['prior period error','prior-period errors']},
+ {n:10,pas:'PAS 10',q:'Events after the reporting period that provide evidence of conditions that EXISTED at the end of the reporting period and require adjustment of the financial statements.',a:'Adjusting events',alt:['adjusting event','adjusting events after the reporting period']},
+ {n:11,pas:'PAS 10',q:'Events after the reporting period that indicate conditions that AROSE after the reporting period; these are only disclosed in the notes and do not require adjustment to the financial statements.',a:'Non-adjusting events',alt:['non-adjusting event','nonadjusting events']},
+ {n:12,pas:'PAS 10',q:'Under PAS 10, this is the critical date after which events are classified as either adjusting or non-adjusting — it is the date when MANAGEMENT (not shareholders) approves the financial statements for release.',a:'Date of authorization for issue',alt:['authorization date','date authorized for issue','date of authorization']},
+ {n:13,pas:'PAS 12',q:'The difference between the carrying amount of an asset or liability and its tax base that will result in taxable amounts in future periods — gives rise to a Deferred Tax LIABILITY.',a:'Taxable temporary difference',alt:['taxable temporary differences']},
+ {n:14,pas:'PAS 12',q:'The difference between carrying amount and tax base that will result in deductible amounts in future periods — gives rise to a Deferred Tax ASSET (subject to recoverability).',a:'Deductible temporary difference',alt:['deductible temporary differences']},
+ {n:15,pas:'PAS 16',q:'The systematic allocation of the DEPRECIABLE AMOUNT of a tangible asset over its useful life, recognized as expense each period under PAS 16.',a:'Depreciation',alt:['depreciation expense']},
+ {n:16,pas:'PAS 16',q:'Under the PAS 16 Revaluation Model, an upward revaluation of a PPE item (increase in fair value above carrying amount) is recognized in this component of the financial statements — NOT in profit or loss.',a:'Other Comprehensive Income',alt:['oci','other comprehensive income (oci)','revaluation surplus']},
+ {n:17,pas:'PAS 19',q:'The post-employment benefit plan where the employer promises a specified retirement benefit based on salary and years of service; the employer bears all actuarial and investment risks.',a:'Defined benefit plan',alt:['defined benefit','db plan']},
+ {n:18,pas:'PAS 19',q:'The actuarial method required by PAS 19 to determine the present value of the defined benefit obligation, which attributes benefit to each period of employee service.',a:'Projected Unit Credit Method',alt:['projected unit credit','puc method']},
+ {n:19,pas:'PAS 19',q:'Under PAS 19, actuarial gains and losses (remeasurements) on a defined benefit plan are recognized here and are NEVER recycled back to profit or loss.',a:'Other Comprehensive Income',alt:['oci','other comprehensive income (oci)']},
+ {n:20,pas:'PAS 20',q:'Under PAS 20, this method of presenting grants related to assets records the grant as a DEFERRED INCOME LIABILITY and releases it to profit or loss over the useful life of the related asset.',a:'Gross method',alt:['gross presentation','deferred income approach','deferred income method']},
+];
+
+document.addEventListener('DOMContentLoaded',()=>{
+ const sec=document.getElementById('sec-id');
+ idQ.forEach(q=>{
+  const div=document.createElement('div');
+  div.className='qcard';
+  div.id='idq'+q.n;
+  div.innerHTML=`
+   <div class="qnum">Item ${q.n} <span class="qbadge">${q.pas}</span></div>
+   <div class="qtext">${q.q}</div>
+   <input class="id-input" id="idinp${q.n}" placeholder="Type your answer here..." autocomplete="off">
+   <div><button class="check-btn" onclick="checkId(${q.n})">Check Answer</button><span id="idres${q.n}"></span></div>
+   <div class="ans-box" id="idans${q.n}">✓ Correct Answer: <strong>${q.a}</strong></div>
+  `;
+  sec.appendChild(div);
+ });
+});
+
+function checkId(n){
+ const q=idQ[n-1];
+ const inp=document.getElementById('idinp'+n).value.trim().toLowerCase();
+ const correct=inp===q.a.toLowerCase()||q.alt.includes(inp);
+ const res=document.getElementById('idres'+n);
+ const ans=document.getElementById('idans'+n);
+ const card=document.getElementById('idq'+n);
+ document.getElementById('idinp'+n).className='id-input '+(correct?'correct':'wrong');
+ res.innerHTML=`<span class="result-tag ${correct?'correct-tag':'wrong-tag'}">${correct?'✓ Correct!':'✗ Incorrect'}</span>`;
+ ans.classList.add('show');
+ card.classList.add('answered');
+ updateScore(correct,'id'+n);
+}
+</script>
+</div>
+
+<!-- ==================== TRUE OR FALSE ==================== -->
+<div class="section" id="sec-tf">
+<div class="sec-hdr">
+  <h2>Part II — True or False (25 items)</h2>
+  <p>Determine whether each statement is TRUE or FALSE based on 2026 Philippine Accounting Standards.</p>
+</div>
+
+<script>
+const tfQ=[
+ {n:1,pas:'PAS 2',q:'The Last-In, First-Out (LIFO) method is a permissible cost formula for measuring inventory under PAS 2.',a:false,exp:'LIFO is PROHIBITED under PAS 2. Only Specific Identification, FIFO, and Weighted Average Cost are permitted.'},
+ {n:2,pas:'PAS 2',q:'Abnormal amounts of wasted materials, labor, and other production costs should be included in the cost of inventories.',a:false,exp:'Abnormal waste is EXCLUDED from inventory cost and recognized as an expense in the period incurred.'},
+ {n:3,pas:'PAS 2',q:'Net Realizable Value (NRV) is the estimated selling price less the estimated costs of completion and estimated costs to sell.',a:true,exp:'Correct. NRV = Estimated selling price − Costs to complete − Costs to sell. This is the standard definition under PAS 2.'},
+ {n:4,pas:'PAS 2',q:'Freight-out (delivery costs to customers) should be capitalized as part of the cost of inventories.',a:false,exp:'Freight-out is a SELLING COST — expensed in the period incurred, NOT included in inventory cost. Freight-IN is capitalized.'},
+ {n:5,pas:'PAS 2',q:'A reversal of a write-down of inventories to NRV is recognized as a reduction of the amount of inventories recognized as an expense in the period in which the reversal occurs.',a:true,exp:'Correct. When circumstances that caused the write-down no longer exist, the reversal is recognized as income (reducing COGS), limited to the original write-down amount.'},
+ {n:6,pas:'PAS 7',q:'The direct method of presenting operating cash flows is the preferred (encouraged) method under PAS 7.',a:true,exp:'TRUE. PAS 7 encourages the direct method as it provides information useful in estimating future cash flows, though the indirect method is more commonly used in practice.'},
+ {n:7,pas:'PAS 7',q:'Non-cash transactions (such as acquiring equipment by issuing shares directly to the seller) must be included in the body of the Statement of Cash Flows.',a:false,exp:'Non-cash investing and financing transactions are EXCLUDED from the SCF and disclosed separately in the notes to the financial statements.'},
+ {n:8,pas:'PAS 7',q:'A bank overdraft that is repayable on demand and forms part of an entity\'s cash management is included as a component of cash and cash equivalents.',a:true,exp:'TRUE. Bank overdrafts that are repayable on demand and fluctuate between positive and negative balances are included as part of cash and cash equivalents.'},
+ {n:9,pas:'PAS 8',q:'A change in depreciation method (e.g., from straight-line to diminishing balance) is classified as a CHANGE IN ACCOUNTING POLICY and applied retrospectively.',a:false,exp:'FALSE. A change in depreciation method is a CHANGE IN ACCOUNTING ESTIMATE applied PROSPECTIVELY (to current and future periods only) — not a policy change.'},
+ {n:10,pas:'PAS 8',q:'When it is difficult to distinguish a change in accounting policy from a change in accounting estimate, PAS 8 requires that the change be treated as a change in accounting estimate.',a:true,exp:'TRUE. PAS 8 explicitly states that when it is difficult to distinguish, the change is treated as a change in accounting estimate and applied prospectively.'},
+ {n:11,pas:'PAS 8',q:'Prior period errors must be corrected by restating the comparative amounts for the prior period(s) presented (retrospective restatement).',a:true,exp:'TRUE. PAS 8 requires retrospective restatement — restate the comparative prior period amounts in the financial statements as if the error had never occurred.'},
+ {n:12,pas:'PAS 10',q:'Dividends declared after the reporting period but before the financial statements are authorized for issue must be recognized as a liability in the current year\'s financial statements.',a:false,exp:'FALSE. Dividends declared after the reporting period are NON-ADJUSTING events. No liability is recognized; they are disclosed in the notes to the financial statements.'},
+ {n:13,pas:'PAS 10',q:'The discovery of fraud or error after the reporting period that indicates financial statements were misstated at year-end is classified as an ADJUSTING event.',a:true,exp:'TRUE. Discovery of fraud or errors showing the financial statements were incorrect at year-end is an adjusting event (evidence of conditions existing at the reporting date).'},
+ {n:14,pas:'PAS 10',q:'A major business combination completed after the reporting period but before authorization of the financial statements is an adjusting event requiring adjustment to the financial statements.',a:false,exp:'FALSE. A major business combination announced or completed after year-end is a NON-ADJUSTING event — it arose after the reporting period. Disclose in notes if material.'},
+ {n:15,pas:'PAS 12',q:'Deferred tax assets and liabilities should be discounted to reflect the time value of money.',a:false,exp:'FALSE. PAS 12 explicitly PROHIBITS discounting of deferred tax assets and liabilities.'},
+ {n:16,pas:'PAS 12',q:'Permanent differences (e.g., non-deductible fines and penalties) between accounting profit and taxable profit give rise to deferred tax assets or liabilities.',a:false,exp:'FALSE. Only TEMPORARY differences create deferred taxes. Permanent differences never result in deferred tax because they will never reverse.'},
+ {n:17,pas:'PAS 12',q:'Deferred tax assets and liabilities are always classified as NONCURRENT items in a classified Statement of Financial Position.',a:true,exp:'TRUE. Under PAS 12 (as amended), deferred tax assets and liabilities are always presented as NONCURRENT — they are never split into current and noncurrent portions.'},
+ {n:18,pas:'PAS 16',q:'Land is subject to depreciation over its estimated useful life because all assets eventually lose value.',a:false,exp:'FALSE. Land is NOT depreciated under PAS 16 because it has an UNLIMITED useful life. Land and buildings are treated as separate components.'},
+ {n:19,pas:'PAS 16',q:'Under PAS 16, depreciation of an asset ceases when the asset becomes idle, is temporarily taken out of use, or is retired from active use.',a:false,exp:'FALSE. Depreciation does NOT cease when an asset becomes idle or is taken out of active use. It ceases only when the asset is DERECOGNIZED or fully depreciated. (Exception: units-of-production method when there is zero production.)'},
+ {n:20,pas:'PAS 16',q:'Under the revaluation model, when a previously revalued asset is written down, the decrease is first charged against any existing revaluation surplus for that asset before being recognized in profit or loss.',a:true,exp:'TRUE. A revaluation decrease is first offset against the revaluation surplus for that specific asset. Only excess decreases beyond the existing surplus are recognized in profit or loss.'},
+ {n:21,pas:'PAS 19',q:'Under a Defined Contribution (DC) plan, once the employer makes the required contributions, it has NO further obligation regardless of how the plan assets perform.',a:true,exp:'TRUE. In a DC plan, the employer\'s obligation is fixed at the contribution amount. All actuarial and investment risk is borne by the employee — no further employer obligation.'},
+ {n:22,pas:'PAS 19',q:'Actuarial gains and losses (remeasurements) on defined benefit plans recognized in Other Comprehensive Income can be RECYCLED (reclassified) to profit or loss in subsequent periods.',a:false,exp:'FALSE. Remeasurements of the net defined benefit liability/asset (actuarial gains/losses) recognized in OCI are NEVER recycled to profit or loss. They remain permanently in OCI.'},
+ {n:23,pas:'PAS 19',q:'Termination benefits are recognized as a liability and expense when the entity is demonstrably committed to terminate the employment of an employee or group of employees.',a:true,exp:'TRUE. Termination benefits are recognized when the entity has a present obligation — when it is demonstrably committed to a termination plan (detailed plan, no realistic withdrawal possible).'},
+ {n:24,pas:'PAS 20',q:'Government grants must be recognized immediately in profit or loss upon receipt of the cash or upon formal notification of approval.',a:false,exp:'FALSE. Grants are recognized systematically over the periods in which the related costs/conditions are recognized (matching principle). They are not recognized immediately upon receipt.'},
+ {n:25,pas:'PAS 20',q:'Tax benefits such as income tax holidays and investment tax credits granted by the government are within the scope of PAS 20.',a:false,exp:'FALSE. Tax benefits (income tax holidays, investment credits, accelerated depreciation for tax purposes) are explicitly EXCLUDED from the scope of PAS 20. They are covered by PAS 12.'},
+];
+
+document.addEventListener('DOMContentLoaded',()=>{
+ const sec=document.getElementById('sec-tf');
+ tfQ.forEach(q=>{
+  const div=document.createElement('div');
+  div.className='qcard';
+  div.id='tfq'+q.n;
+  div.innerHTML=`
+   <div class="qnum">Item ${q.n} <span class="qbadge">${q.pas}</span></div>
+   <div class="qtext">${q.q}</div>
+   <div class="tf-opts">
+    <button class="tf-btn" id="tfT${q.n}" onclick="checkTf(${q.n},true)">TRUE</button>
+    <button class="tf-btn" id="tfF${q.n}" onclick="checkTf(${q.n},false)">FALSE</button>
+   </div>
+   <div class="ans-box" id="tfans${q.n}"><strong>${q.a?'TRUE':'FALSE'}</strong> — ${q.exp}</div>
+  `;
+  sec.appendChild(div);
+ });
+});
+
+function checkTf(n,val){
+ const q=tfQ[n-1];
+ const correct=val===q.a;
+ const tBtn=document.getElementById('tfT'+n);
+ const fBtn=document.getElementById('tfF'+n);
+ tBtn.onclick=null;fBtn.onclick=null;
+ if(val){
+  tBtn.className='tf-btn '+(correct?'correct':'wrong');
+  if(!correct)fBtn.className='tf-btn correct';
+ } else {
+  fBtn.className='tf-btn '+(correct?'correct':'wrong');
+  if(!correct)tBtn.className='tf-btn correct';
+ }
+ document.getElementById('tfans'+n).classList.add('show');
+ document.getElementById('tfq'+n).classList.add('answered');
+ updateScore(correct,'tf'+n);
+}
+</script>
+</div>
+
+<!-- ==================== MULTIPLE CHOICE ==================== -->
+<div class="section" id="sec-mc">
+<div class="sec-hdr">
+  <h2>Part III — Multiple Choice (20 items)</h2>
+  <p>Select the BEST answer. Click an option to submit your answer.</p>
+</div>
+
+<script>
+const mcQ=[
+ {n:1,pas:'PAS 2',q:'Which of the following costs should be EXCLUDED from the cost of inventories under PAS 2?',
+  opts:['Import duties and non-refundable taxes on purchases','Freight-in (inward transportation costs)','Abnormal waste of materials and labor','Conversion costs including direct labor'],a:2,
+  exp:'Abnormal waste must be expensed in the period incurred — it is NOT a cost of inventories. Import duties, freight-in, and conversion costs are all includable.'},
+ {n:2,pas:'PAS 2',q:'Entity A holds inventory with a cost of ₱500,000. At year-end: estimated selling price ₱480,000; estimated costs to complete ₱10,000; estimated costs to sell ₱15,000. What is the carrying amount of inventory at year-end?',
+  opts:['₱500,000 (at cost)','₱480,000 (estimated selling price)','₱455,000 (NRV: ₱480K − ₱10K − ₱15K)','₱465,000 (₱480K − ₱15K only)'],a:2,
+  exp:'NRV = ₱480,000 − ₱10,000 − ₱15,000 = ₱455,000. Since NRV (₱455K) < Cost (₱500K), inventory is written down to ₱455,000.'},
+ {n:3,pas:'PAS 7',q:'Which of the following is classified as an INVESTING activity in the Statement of Cash Flows?',
+  opts:['Payment of dividends to shareholders','Repayment of bank loans','Purchase of property, plant and equipment','Receipt of advances from customers'],a:2,
+  exp:'Purchase of PPE is an investing activity (acquisition of a long-term asset). Dividend payments = financing; loan repayments = financing; advances from customers = operating.'},
+ {n:4,pas:'PAS 7',q:'Under the INDIRECT method, which adjustment is made to net profit to arrive at net cash from operating activities?',
+  opts:['Add an increase in accounts receivable','Add a gain on sale of equipment','Add depreciation expense','Deduct an increase in accounts payable'],a:2,
+  exp:'Depreciation is a non-cash expense added back to net profit. Increase in AR = deduct (cash not yet received). Gain on sale = deduct (belongs in investing). Increase in AP = add.'},
+ {n:5,pas:'PAS 7',q:'A company acquired equipment worth ₱2,000,000 by issuing ordinary shares directly to the seller. How is this presented in the Statement of Cash Flows?',
+  opts:['Inflow of ₱2M in financing; outflow of ₱2M in investing','Shown as a ₱2M investing outflow only','Excluded from the SCF; disclosed as a non-cash transaction in notes','Shown as a ₱2M financing inflow only'],a:2,
+  exp:'Non-cash investing and financing transactions are EXCLUDED from the Statement of Cash Flows. They are disclosed separately in the notes.'},
+ {n:6,pas:'PAS 8',q:'Company X changes its method of accounting for long-term construction contracts. Which treatment is CORRECT?',
+  opts:['Prospective — apply to current and future projects only','Retrospective — restate prior period financial statements','Recognize a cumulative adjustment in profit or loss currently','No adjustment needed; only disclose the change in notes'],a:1,
+  exp:'A change in accounting POLICY is applied RETROSPECTIVELY — restate prior period comparative figures as if the new policy had always been applied.'},
+ {n:7,pas:'PAS 8',q:'Entity B discovers in 2025 that it failed to accrue interest expense of ₱300,000 in the 2023 financial statements. How should this be treated in the 2025 financial statements?',
+  opts:['Include the ₱300,000 in 2025 interest expense (prospective)','Restate the 2023 comparative figures (retrospective restatement)','Recognize ₱300,000 directly in retained earnings only','Disclose in notes without adjustment'],a:1,
+  exp:'Material prior period errors are corrected by RETROSPECTIVE RESTATEMENT — restating the earliest comparative period presented and adjusting the opening balance of retained earnings.'},
+ {n:8,pas:'PAS 10',q:'Entity C\'s year-end is December 31, 2025. Financial statements authorized for issue: March 20, 2026. On February 10, 2026, a major customer (₱500,000 receivable at Dec 31) was declared bankrupt. How is this treated?',
+  opts:['Non-adjusting event — disclose in notes only','Adjusting event — write off ₱500,000 receivable in 2025 FS','Adjusting event — disclose in notes with the amount','No treatment required since it occurred after year-end'],a:1,
+  exp:'The customer\'s financial difficulty EXISTED at December 31 — the bankruptcy confirms conditions at year-end. This is an ADJUSTING event. The receivable must be written off (or allowance provided) in the 2025 financial statements.'},
+ {n:9,pas:'PAS 10',q:'Which of the following is a NON-ADJUSTING event after the reporting period?',
+  opts:['Settlement of a lawsuit confirming a liability existing at year-end','Sale of inventory after year-end at a price below year-end carrying amount','A major fire destroying a significant warehouse after year-end','Discovery of a mathematical error in prior year financial statements'],a:2,
+  exp:'A fire that occurs AFTER the reporting period represents conditions that AROSE after year-end → NON-ADJUSTING event (disclose if material). The others all provide evidence of conditions existing at year-end → adjusting events.'},
+ {n:10,pas:'PAS 12',q:'Entity D: Accounting profit ₱2,000,000. Non-deductible fines ₱150,000 (permanent). Accelerated tax depreciation exceeds book depreciation by ₱250,000. Tax rate 25%. What is the CURRENT TAX expense?',
+  opts:['₱500,000','₱475,000','₱537,500','₱525,000'],a:1,
+  exp:'Taxable profit = ₱2,000,000 + ₱150,000 (add back non-deductible) − ₱250,000 (extra tax deduction) = ₱1,900,000. Current tax = ₱1,900,000 × 25% = ₱475,000.'},
+ {n:11,pas:'PAS 12',q:'A deferred tax asset arising from deductible temporary differences should be recognized only to the extent that:',
+  opts:['The entity is currently generating accounting profits','It is PROBABLE that sufficient future taxable profit will be available to utilize it','It is POSSIBLE that future taxable profit will be available','The entity has no taxable temporary differences to offset'],a:1,
+  exp:'PAS 12 requires recognition of DTA only when it is PROBABLE (more likely than not) that sufficient future taxable profits will be available against which the deductible temporary difference can be utilized.'},
+ {n:12,pas:'PAS 16',q:'Entity E purchases equipment: purchase price ₱1,000,000; freight-in ₱30,000; installation and testing ₱50,000; initial operating losses during testing ₱20,000; promotional launch event ₱40,000. What is the initial cost of the equipment?',
+  opts:['₱1,140,000','₱1,100,000','₱1,080,000','₱1,120,000'],a:1,
+  exp:'Cost = ₱1,000,000 + ₱30,000 + ₱50,000 = ₱1,080,000. Initial operating losses (₱20,000) and promotional launch costs (₱40,000) are EXCLUDED from cost and expensed. Answer: ₱1,080,000. Select C.'},
+ {n:13,pas:'PAS 16',q:'Under PAS 16, the REVALUATION MODEL requires that when the carrying amount of an asset DECREASES due to revaluation, the decrease is:',
+  opts:['Recognized entirely in profit or loss','Charged first against any existing revaluation surplus for that asset; excess to profit or loss','Recognized directly in retained earnings','Deferred and amortized over the remaining useful life'],a:1,
+  exp:'A revaluation decrease is first applied to reduce the existing revaluation surplus for that class of asset. Only the excess beyond the existing surplus is recognized as an expense in profit or loss.'},
+ {n:14,pas:'PAS 16',q:'Entity F owns equipment: cost ₱600,000; useful life 10 years (SL, zero residual). After 6 years, the remaining useful life is revised to 2 more years. What is annual depreciation for Year 7?',
+  opts:['₱60,000','₱120,000','₱90,000','₱150,000'],a:1,
+  exp:'CA after 6 years = ₱600,000 − (₱60,000 × 6) = ₱240,000. Revised remaining life = 2 years. New annual depreciation = ₱240,000 ÷ 2 = ₱120,000. (Change in estimate → prospective.)'},
+ {n:15,pas:'PAS 19',q:'Under PAS 19, which components of defined benefit cost are recognized in PROFIT OR LOSS (not OCI)?',
+  opts:['Actuarial gains and losses only','Return on plan assets only','Current service cost and net interest on the net defined benefit liability/asset','Past service cost, current service cost, and actuarial gains/losses'],a:2,
+  exp:'P&L components = Current service cost + Past service cost (when plan is amended) + Net interest on net DB liability/asset. Actuarial gains/losses (remeasurements) go to OCI and are NEVER recycled.'},
+ {n:16,pas:'PAS 19',q:'Entity G has a Defined Benefit plan. Net DB liability at Jan 1 = ₱2,000,000. Discount rate = 10%. Current service cost = ₱500,000. What is total DB cost recognized in PROFIT OR LOSS for the year?',
+  opts:['₱500,000','₱700,000','₱200,000','₱2,700,000'],a:1,
+  exp:'P&L = Current service cost ₱500,000 + Net interest (₱2,000,000 × 10%) ₱200,000 = ₱700,000. (Actuarial remeasurements are excluded from P&L.)'},
+ {n:17,pas:'PAS 20',q:'Entity H receives a ₱4,000,000 government grant to purchase machinery worth ₱20,000,000 (10-year life, zero residual, straight-line). Under the GROSS METHOD, how is the grant presented?',
+  opts:['Deduct ₱4,000,000 from machinery cost → carry machinery at ₱16,000,000','Recognize ₱4,000,000 in profit or loss immediately upon receipt','Recognize ₱400,000 in income per year as deferred income over 10 years','Recognize ₱2,000,000 income in Year 1 and Year 2 only'],a:2,
+  exp:'Gross method: Record machinery at full cost ₱20M and record ₱4M as deferred income (liability). Release ₱400,000 per year to income (₱4M ÷ 10 years), matching the ₱2M annual depreciation.'},
+ {n:18,pas:'PAS 20',q:'A government grant requires an entity to construct a building in a depressed area and employ local workers for at least 3 years. When should the grant be recognized as income?',
+  opts:['Immediately upon receipt of the cash from the government','Only when all 3 years of employment are completed','Systematically over the 3-year period as employment conditions are met','Disclosed only; not recognized until all conditions are fully met'],a:2,
+  exp:'Grants with conditions are recognized systematically in P&L over the periods as the conditions are met — matching the related costs (wages/employment costs incurred over 3 years).'},
+ {n:19,pas:'PAS 2',q:'Under PAS 2, which statement about REVERSAL of inventory write-downs is CORRECT?',
+  opts:['Reversals are prohibited once inventory has been written down to NRV','Reversals are recognized as income with no ceiling','Reversals are limited to the amount of the original write-down','Reversals are credited directly to Other Comprehensive Income'],a:2,
+  exp:'When NRV subsequently increases, PAS 2 allows reversal of prior write-downs. However, the reversal is LIMITED to the original write-down amount — inventory cannot be written up above original cost.'},
+ {n:20,pas:'PAS 8',q:'Which of the following is NOT a reason that justifies a voluntary change in accounting policy under PAS 8?',
+  opts:['The new policy provides more relevant financial information','The new policy results in more reliable financial information','The entity\'s management prefers the new policy for simplicity','A new PFRS standard requires adoption of the new policy'],a:2,
+  exp:'Simplicity or management preference alone is NOT an acceptable reason for changing accounting policies. Voluntary changes are only allowed if the new policy results in MORE RELEVANT AND RELIABLE information, or if required by a new PFRS.'},
+];
+
+document.addEventListener('DOMContentLoaded',()=>{
+ const sec=document.getElementById('sec-mc');
+ const letters=['A','B','C','D'];
+ mcQ.forEach(q=>{
+  const div=document.createElement('div');
+  div.className='qcard';
+  div.id='mcq'+q.n;
+  const optsHtml=q.opts.map((o,i)=>`
+   <label class="opt" id="mcopt${q.n}_${i}" onclick="checkMc(${q.n},${i})">
+    <input type="radio" name="mc${q.n}" value="${i}"> <span><strong>${letters[i]}.</strong> ${o}</span>
+   </label>`).join('');
+  div.innerHTML=`
+   <div class="qnum">Item ${q.n} <span class="qbadge">${q.pas}</span></div>
+   <div class="qtext">${q.q}</div>
+   <div class="opts">${optsHtml}</div>
+   <div class="ans-box" id="mcans${q.n}">✓ Answer: <strong>${letters[q.a]}. ${q.opts[q.a]}</strong><br>${q.exp}</div>
+  `;
+  sec.appendChild(div);
+ });
+});
+
+function checkMc(n,chosen){
+ const q=mcQ[n-1];
+ const correct=chosen===q.a;
+ const letters=['A','B','C','D'];
+ for(let i=0;i<q.opts.length;i++){
+  const el=document.getElementById('mcopt'+n+'_'+i);
+  el.onclick=null;
+  el.querySelector('input').disabled=true;
+  if(i===q.a)el.className='opt correct';
+  else if(i===chosen&&!correct)el.className='opt wrong';
+ }
+ document.getElementById('mcans'+n).classList.add('show');
+ document.getElementById('mcq'+n).classList.add('answered');
+ updateScore(correct,'mc'+n);
+}
+</script>
+</div>
+
+<!-- ==================== COMPUTATION ==================== -->
+<div class="section" id="sec-cp">
+<div class="sec-hdr">
+  <h2>Part IV — Computation (5 items)</h2>
+  <p>Show your complete solution. Click "Show Solution" to reveal the model answer and scoring guide.</p>
+</div>
+
+<div class="qcard" id="cpq1">
+ <div class="qnum">Problem 1 <span class="qbadge">PAS 2 — Inventories (FIFO & Weighted Average)</span></div>
+ <div class="qtext">
+  <strong>Magaling Trading Co.</strong> provided the following inventory data for the year ended December 31, 2025:<br><br>
+  Jan 1 — Beginning inventory: 100 units @ ₱50.00<br>
+  Mar 15 — Purchase: 300 units @ ₱55.00<br>
+  Jul 20 — Purchase: 200 units @ ₱62.00<br>
+  Sep 5 — Sale: 420 units<br>
+  Dec 31 — Ending inventory: 180 units (verified by count)<br><br>
+  <strong>Required:</strong><br>
+  (a) Cost of ending inventory and Cost of Goods Sold using <strong>FIFO</strong><br>
+  (b) Cost of ending inventory and Cost of Goods Sold using <strong>Weighted Average Cost</strong>
+ </div>
+ <div class="comp-area">
+  <textarea placeholder="Write your solution here..."></textarea>
+  <button class="show-ans-btn" onclick="showComp(1)">Show Solution & Scoring Guide</button>
+ </div>
+ <div class="comp-solution" id="cpans1">SOLUTION — PAS 2: INVENTORIES
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TOTAL UNITS AVAILABLE:
+100 + 300 + 200 = 600 units
+Units sold: 420 | Ending inventory: 180 units ✓ (600 − 420 = 180)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(a) FIFO — First-In, First-Out
+
+COGS (420 units sold — earliest costs first):
+  From Jan 1:  100 units × ₱50.00 = ₱  5,000
+  From Mar 15: 300 units × ₱55.00 = ₱ 16,500
+  From Jul 20:  20 units × ₱62.00 = ₱  1,240
+  ─────────────────────────────────────────────
+  Total COGS:  420 units            = ₱ 22,740
+
+ENDING INVENTORY (remaining 180 units — latest costs):
+  From Jul 20: 180 units × ₱62.00 = ₱ 11,160
+  ─────────────────────────────────────────────
+  FIFO Ending Inventory              = ₱ 11,160
+
+PROOF: ₱22,740 + ₱11,160 = ₱33,900 (Total TGAS) ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(b) WEIGHTED AVERAGE COST METHOD
+
+Total Cost of Goods Available for Sale (TGAS):
+  100 × ₱50.00 = ₱ 5,000
+  300 × ₱55.00 = ₱16,500
+  200 × ₱62.00 = ₱12,400
+  ─────────────────────────
+  TGAS: 600 units = ₱33,900
+
+Weighted Average Unit Cost:
+  ₱33,900 ÷ 600 units = ₱56.50 per unit
+
+COGS: 420 units × ₱56.50 = ₱23,730
+ENDING INVENTORY: 180 units × ₱56.50 = ₱10,170
+
+PROOF: ₱23,730 + ₱10,170 = ₱33,900 ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+KEY CONCEPTS TESTED:
+• LIFO = PROHIBITED under PAS 2
+• FIFO: ending inventory = most recent costs
+• WA: single average cost applied to all units
+• Always verify: COGS + Ending Inv = TGAS</div>
+</div>
+
+<div class="qcard" id="cpq2">
+ <div class="qnum">Problem 2 <span class="qbadge">PAS 7 — Statement of Cash Flows (Indirect Method)</span></div>
+ <div class="qtext">
+  <strong>Daluyong Corporation</strong> reported the following for year ended December 31, 2025:<br><br>
+  Net profit after income tax: ₱1,500,000<br>
+  Depreciation expense: ₱200,000<br>
+  Amortization of intangible assets: ₱50,000<br>
+  Gain on sale of equipment: ₱80,000<br>
+  Loss on sale of investments: ₱30,000<br>
+  Increase in accounts receivable: ₱120,000<br>
+  Decrease in inventories: ₱60,000<br>
+  Increase in accounts payable: ₱90,000<br>
+  Decrease in accrued liabilities: ₱25,000<br>
+  Decrease in income tax payable: ₱40,000<br><br>
+  <strong>Required:</strong> Compute the <strong>Net Cash from Operating Activities</strong> using the <strong>Indirect Method</strong>.
+ </div>
+ <div class="comp-area">
+  <textarea placeholder="Show your complete solution..."></textarea>
+  <button class="show-ans-btn" onclick="showComp(2)">Show Solution & Scoring Guide</button>
+ </div>
+ <div class="comp-solution" id="cpans2">SOLUTION — PAS 7: STATEMENT OF CASH FLOWS (INDIRECT METHOD)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DALUYONG CORPORATION
+Cash Flows from Operating Activities (Indirect Method)
+For the Year Ended December 31, 2025
+
+Net profit after income tax               ₱1,500,000
+
+Adjustments for non-cash items:
+  Add: Depreciation expense                  200,000
+  Add: Amortization of intangibles            50,000
+  Less: Gain on sale of equipment            (80,000)  ← remove; belongs in investing
+  Add: Loss on sale of investments            30,000   ← add back; belongs in investing
+
+Changes in working capital:
+  Less: Increase in accounts receivable     (120,000)  ← cash not yet received
+  Add: Decrease in inventories               60,000    ← sold for cash
+  Add: Increase in accounts payable          90,000    ← not yet paid in cash
+  Less: Decrease in accrued liabilities      (25,000)  ← paid in cash
+  Less: Decrease in income tax payable       (40,000)  ← paid more cash
+                                           ──────────
+Net Cash from Operating Activities        ₱1,665,000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RULES TO REMEMBER (PAS 7):
+• Non-cash EXPENSES (depreciation, amortization) → ADD BACK
+• Gains on disposal → DEDUCT (will be in investing section)
+• Losses on disposal → ADD (will be in investing section)
+• Increase in current ASSET → DEDUCT
+• Decrease in current ASSET → ADD
+• Increase in current LIABILITY → ADD
+• Decrease in current LIABILITY → DEDUCT</div>
+</div>
+
+<div class="qcard" id="cpq3">
+ <div class="qnum">Problem 3 <span class="qbadge">PAS 12 — Income Taxes (Current & Deferred)</span></div>
+ <div class="qtext">
+  <strong>Buwis Corporation</strong> provided the following for the year ended December 31, 2025:<br><br>
+  Accounting profit before income tax: ₱5,000,000<br>
+  Items causing differences from taxable profit:<br>
+  &nbsp;&nbsp;(a) Non-deductible entertainment expenses (permanent): ₱200,000<br>
+  &nbsp;&nbsp;(b) Depreciation per books > Tax depreciation by ₱400,000 (taxable temporary difference — tax deducted MORE this year)<br>
+  &nbsp;&nbsp;(c) Warranty expense accrued in books ₱300,000 (deductible for tax only when actually paid — deductible temp. difference)<br>
+  Corporate income tax rate: 25%<br><br>
+  <strong>Required:</strong><br>
+  (a) Taxable profit and current tax expense<br>
+  (b) Deferred tax expense or income<br>
+  (c) Total income tax expense in profit or loss
+ </div>
+ <div class="comp-area">
+  <textarea placeholder="Show your complete solution..."></textarea>
+  <button class="show-ans-btn" onclick="showComp(3)">Show Solution & Scoring Guide</button>
+ </div>
+ <div class="comp-solution" id="cpans3">SOLUTION — PAS 12: INCOME TAXES
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(a) TAXABLE PROFIT AND CURRENT TAX
+
+Accounting profit before tax              ₱5,000,000
+
+Permanent difference:
+  Add: Non-deductible entertainment         200,000   ← deducted in books, never allowed for tax
+
+Temporary differences:
+  Less: Extra tax depreciation             (400,000)  ← tax deducted MORE → taxable profit lower
+  Add: Warranty expense (not yet deductible) 300,000  ← accrued in books, not yet deductible for BIR
+                                           ──────────
+TAXABLE PROFIT                            ₱5,100,000
+
+CURRENT TAX EXPENSE:
+₱5,100,000 × 25% = ₱1,275,000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(b) DEFERRED TAX MOVEMENTS
+
+Item (b) — Extra tax depreciation ₱400,000:
+  Tax base of asset < Carrying amount → TAXABLE temp. diff.
+  → Deferred Tax LIABILITY (DTL) = ₱400,000 × 25% = ₱100,000
+  (Will pay MORE tax in the future when tax depreciation runs out)
+
+Item (c) — Warranty accrual ₱300,000:
+  Tax base of liability = ₱0 (not yet deductible); CA = ₱300,000
+  → DEDUCTIBLE temp. diff. → Deferred Tax ASSET (DTA) = ₱300,000 × 25% = ₱75,000
+  (Will save on tax in the future when warranty is actually paid)
+
+Net Deferred Tax EXPENSE = DTL ₱100,000 − DTA ₱75,000 = ₱25,000 (net DTL)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(c) TOTAL INCOME TAX EXPENSE
+
+Current tax expense                       ₱1,275,000
+Deferred tax expense (net)                    25,000
+                                           ──────────
+TOTAL INCOME TAX EXPENSE                  ₱1,300,000
+
+PROOF CHECK:
+(Accounting profit + permanent diff.) × tax rate
+= (₱5,000,000 + ₱200,000) × 25% = ₱1,300,000 ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+KEY RULES (PAS 12):
+• Permanent diff. → affects CURRENT TAX only; NO deferred tax
+• Taxable temp. diff. → DTL (pay more later)
+• Deductible temp. diff. → DTA (pay less later)
+• Deferred taxes = NEVER DISCOUNTED; always NONCURRENT</div>
+</div>
+
+<div class="qcard" id="cpq4">
+ <div class="qnum">Problem 4 <span class="qbadge">PAS 16 — Property, Plant and Equipment (Revaluation Model)</span></div>
+ <div class="qtext">
+  <strong>Haligi Corporation</strong> acquired a building on January 1, 2023 for ₱6,000,000. Estimated useful life: 20 years; residual value: ₱0; straight-line method. The company uses the <strong>Revaluation Model</strong>.<br><br>
+  On <strong>December 31, 2024</strong> (after 2 full years), the building is revalued. The appraised fair value is ₱5,800,000.<br><br>
+  On <strong>December 31, 2026</strong> (after 2 more years), the building is revalued again. The appraised fair value is ₱4,200,000.<br><br>
+  <strong>Required:</strong><br>
+  (a) Carrying amount immediately BEFORE the December 31, 2024 revaluation<br>
+  (b) Entry to record the December 31, 2024 revaluation<br>
+  (c) Carrying amount immediately BEFORE the December 31, 2026 revaluation<br>
+  (d) Entry to record the December 31, 2026 revaluation and where losses are charged
+ </div>
+ <div class="comp-area">
+  <textarea placeholder="Show your complete solution..."></textarea>
+  <button class="show-ans-btn" onclick="showComp(4)">Show Solution & Scoring Guide</button>
+ </div>
+ <div class="comp-solution" id="cpans4">SOLUTION — PAS 16: PPE REVALUATION MODEL
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ORIGINAL COST (Jan 1, 2023)    ₱6,000,000
+Useful life: 20 years; Annual depreciation: ₱6,000,000 ÷ 20 = ₱300,000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(a) CARRYING AMOUNT BEFORE DEC 31, 2024 REVALUATION
+
+Cost:                           ₱6,000,000
+Accumulated depreciation:       (₱300,000 × 2 years) = (₱600,000)
+Carrying amount (Dec 31, 2024): ₱5,400,000
+
+(b) REVALUATION — DEC 31, 2024
+Fair value:                     ₱5,800,000
+Carrying amount before:         ₱5,400,000
+REVALUATION INCREASE:           ₱  400,000 → OCI (Revaluation Surplus)
+
+JOURNAL ENTRY (elimination method):
+  Accumulated Depreciation   ₱600,000
+  Building (to fair value)              ₱200,000 (net: 5,800 − 6,000 = −200 to cost)
+
+Wait — net effect: Building restated to ₱5,800,000.
+Using ELIMINATION method:
+  Dr. Accumulated Depreciation  600,000
+  Cr. Building                            200,000
+  Cr. Revaluation Surplus (OCI)           400,000
+
+New CA = ₱5,800,000 (no accumulated depreciation after revaluation)
+Remaining useful life = 18 years
+New annual depreciation = ₱5,800,000 ÷ 18 = ₱322,222
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(c) CARRYING AMOUNT BEFORE DEC 31, 2026 REVALUATION
+
+Carrying amount after Dec 31, 2024 revaluation:  ₱5,800,000
+Depreciation 2025 + 2026: (₱322,222 × 2) =       (₱644,444)
+                                                   ──────────
+Carrying amount (Dec 31, 2026) BEFORE revaluation: ₱5,155,556
+
+(d) REVALUATION — DEC 31, 2026
+Fair value:                     ₱4,200,000
+Carrying amount before:         ₱5,155,556
+REVALUATION DECREASE:           ₱  955,556
+
+ALLOCATION OF DECREASE:
+  Against existing Revaluation Surplus:  ₱400,000 → debit OCI (Revaluation Surplus)
+  Excess charged to Profit or Loss:      ₱555,556 → debit P&L (Impairment/Revaluation loss)
+
+JOURNAL ENTRY:
+  Dr. Revaluation Surplus (OCI)      400,000
+  Dr. Revaluation Loss (P&L)         555,556
+  Dr. Accumulated Depreciation       644,444
+    Cr. Building                            1,600,000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+KEY RULES (PAS 16 REVALUATION):
+• Revaluation INCREASE → OCI (Revaluation Surplus)
+• Revaluation DECREASE → first reduce Revaluation Surplus; excess to P&L
+• After revaluation: recalculate depreciation based on new CA and remaining life
+• Revaluation Surplus may be transferred to Retained Earnings as asset is used</div>
+</div>
+
+<div class="qcard" id="cpq5">
+ <div class="qnum">Problem 5 <span class="qbadge">PAS 19 — Defined Benefit Plan</span></div>
+ <div class="qtext">
+  <strong>Malakas Corporation</strong> has a Defined Benefit (DB) retirement plan. The following information is available for 2025:<br><br>
+  PV of Defined Benefit Obligation (DBO), Jan 1: ₱10,000,000<br>
+  Fair Value of Plan Assets (FVPA), Jan 1: ₱7,500,000<br>
+  Current service cost: ₱800,000<br>
+  Discount/interest rate: 8% per annum<br>
+  Actual return on plan assets during 2025: ₱750,000<br>
+  Actuarial loss on DBO during 2025 (from experience adjustments): ₱250,000<br>
+  Benefits paid to retirees during 2025: ₱600,000<br>
+  Contributions paid to the fund during 2025: ₱700,000<br><br>
+  <strong>Required:</strong><br>
+  (a) Net Defined Benefit Liability at January 1, 2025<br>
+  (b) DB Cost recognized in PROFIT OR LOSS for 2025<br>
+  (c) Remeasurement recognized in OTHER COMPREHENSIVE INCOME for 2025<br>
+  (d) PV of DBO and FVPA at December 31, 2025<br>
+  (e) Net Defined Benefit Liability at December 31, 2025
+ </div>
+ <div class="comp-area">
+  <textarea placeholder="Show your complete solution..."></textarea>
+  <button class="show-ans-btn" onclick="showComp(5)">Show Solution & Scoring Guide</button>
+ </div>
+ <div class="comp-solution" id="cpans5">SOLUTION — PAS 19: DEFINED BENEFIT PLAN
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(a) NET DEFINED BENEFIT LIABILITY — JAN 1, 2025
+
+PV of DBO (Jan 1):              ₱10,000,000
+FVPA (Jan 1):                   (₱7,500,000)
+                                 ──────────
+NET DB LIABILITY (Jan 1):        ₱2,500,000   ← presented as noncurrent liability
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(b) DB COST IN PROFIT OR LOSS (2025)
+
+Current service cost:                           ₱800,000
+Net interest on net DB liability:
+  Net DB liability (Jan 1) × discount rate
+  ₱2,500,000 × 8%                               200,000
+                                                ─────────
+TOTAL DB COST IN P&L:                          ₱1,000,000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(c) REMEASUREMENT IN OTHER COMPREHENSIVE INCOME
+
+Return on plan assets (actual):                 ₱750,000
+Expected return on plan assets
+  (FVPA Jan 1 × discount rate):
+  ₱7,500,000 × 8% =                            (₱600,000)
+Remeasurement GAIN on plan assets:               ₱150,000  → OCI GAIN
+
+Actuarial LOSS on DBO:                          (₱250,000) → OCI LOSS
+
+NET REMEASUREMENT IN OCI:                       (₱100,000) → Net OCI LOSS
+
+Note: Remeasurements are NEVER recycled to P&L (PAS 19 requirement)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(d) DBO AND FVPA AT DECEMBER 31, 2025
+
+PV of DBO — Dec 31:
+Opening DBO                     ₱10,000,000
+Current service cost                800,000
+Interest on DBO (₱10M × 8%)        800,000
+Benefits paid                      (600,000)
+Actuarial loss (experience)         250,000
+                                 ──────────
+CLOSING DBO (Dec 31)             ₱11,250,000
+
+FVPA — Dec 31:
+Opening FVPA                     ₱7,500,000
+Contributions received               700,000
+Actual return on plan assets         750,000
+Benefits paid                       (600,000)
+                                 ──────────
+CLOSING FVPA (Dec 31)            ₱8,350,000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(e) NET DB LIABILITY — DEC 31, 2025
+
+PV of DBO (Dec 31)               ₱11,250,000
+FVPA (Dec 31)                    (₱8,350,000)
+                                  ──────────
+NET DB LIABILITY (Dec 31)         ₱2,900,000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RECONCILIATION — NET DB LIABILITY
+
+Opening net DB liability          ₱2,500,000
+Add: DB cost in P&L               1,000,000
+Add: Net OCI loss (remeasurement)   100,000
+Less: Contributions paid           (700,000)
+                                   ─────────
+CLOSING NET DB LIABILITY          ₱2,900,000 ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+KEY RULES (PAS 19 — DB PLAN):
+• P&L = Current Service Cost + Net Interest
+• OCI = Actuarial gains/losses + Difference between actual vs. expected return
+• OCI remeasurements: NEVER recycled to P&L
+• Contributions REDUCE the net DB liability
+• Benefits paid reduce BOTH DBO and FVPA</div>
+</div>
+
+<script>
+function showComp(n){
+ const el=document.getElementById('cpans'+n);
+ el.classList.add('show');
+ document.getElementById('cpq'+n).classList.add('answered');
+}
+</script>
+</div>
+
+<!-- ==================== SHARED SCRIPT ==================== -->
+<script>
+const answered={};
+let score=0;
+const total=70;
+
+function updateScore(correct,id){
+ if(answered[id]!==undefined)return;
+ answered[id]=correct;
+ if(correct)score++;
+ const pct=Math.round((Object.keys(answered).length/total)*100);
+ document.getElementById('scoreVal').textContent=score+' / '+total;
+ document.getElementById('progFill').style.width=pct+'%';
+}
+
+function setTheme(theme){
+ document.documentElement.dataset.theme = theme;
+ const btn = document.getElementById('themeToggle');
+ if(btn) btn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+}
+
+function toggleTheme(){
+ const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+ setTheme(next);
+ localStorage.setItem('theme', next);
+}
+
+function showSec(id,el){
+ document.querySelectorAll('.section').forEach(s=>s.classList.remove('on'));
+ document.querySelectorAll('.ntab').forEach(b=>b.classList.remove('on'));
+ document.getElementById('sec-'+id).classList.add('on');
+ el.classList.add('on');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function resetAll(){
+ if(!confirm('Reset all answers? Your progress will be lost.'))return;
+ location.reload();
+}
+
+(function(){
+ const saved = localStorage.getItem('theme');
+ setTheme(saved === 'dark' ? 'dark' : 'light');
+})();
+</script>
+
+</body>
+</html>
